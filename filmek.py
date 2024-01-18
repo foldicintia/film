@@ -45,31 +45,28 @@ def legrovidebb(filmek_lista):
 def szaztiz(filmek_lista):
     szamlalo= 0
     for i in range(0,len(filmek_lista),1):
-        if filmek_lista[i].perc >= 110:
+        if int(filmek_lista[i].perc) >= 110:
             szamlalo += 1
     return szamlalo
 
 def szinesz_bekeres(filmek_lista):
-    szinesz: str = str(input("Adja meg egy színész nevét!: "))
+    valasz=""
+    szinesz: str = str(input("Adja meg egy színész nevét!: ")) 
+    van_benne:int=0
     for i in range(0,len(filmek_lista),1):
         if filmek_lista[i].foszereplo == szinesz:
-            valasz= print(f"{szinesz} a következő filmekben szerepel: {filmek_lista[i].cim}")
-        elif filmek_lista[i].foszereplo != szinesz:
-            print(f"Nem található olyan film a listában amiben {szinesz} szerepel.")
-    return valasz  
+            valasz+=f"{szinesz} a következő filmekben szerepel: {filmek_lista[i].cim}"
+            print(f"{szinesz} a következő filmekben szerepel: {filmek_lista[i].cim}")
+            van_benne=1
+    if van_benne == 0:
+        valasz+=f"Nem található olyan film a listában amiben {szinesz} szerepel."
+        print(f"Nem található olyan film a listában amiben {szinesz} szerepel.")
+    return valasz
 
-
-def szinesz_bekeres(filmek_lista):
-    szinesz: str = input("Adja meg egy színész nevét!: ")
-    talalatok = []
-    for i in range(0,len(filmek_lista),1):
-        if filmek_lista[i].foszereplo == szinesz:
-            talalatok.append(filmek_lista[i].cim)
-            print(f"{szinesz} a következő filmekben szerepel: {talalatok}")
-        else:
-            print(f"{szinesz} egyik listán szereplő filmben sem szerepel")
-
-    return talalatok
+def kiiras(valasz):
+    fajl = open("kiiras.txt","w",encoding="utf-8")
+    fajl.write(valasz)
+    fajl.close()
 
 
 
